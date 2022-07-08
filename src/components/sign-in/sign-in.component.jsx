@@ -13,12 +13,11 @@ const defaultFormFields = {
 }
 
 const SignIn = () => {
-    const signInWithGoogle = async () => {
-        const {user} = await signInWithGooglePopup()
-        await createUserDocumentFromAuth(user)
-    }
-
     const [formFields, setFormFields] = useState(defaultFormFields)
+
+    const signInWithGoogle = async () => {
+        await signInWithGooglePopup()
+    }
 
     const {email, password} = formFields
 
@@ -28,7 +27,6 @@ const SignIn = () => {
 
     const handleChange = (event) => {
         const {name, value} = event.target
-
         setFormFields({...formFields, [name]: value})
     }
 
@@ -56,7 +54,7 @@ const SignIn = () => {
         <div className='sign-in-container'>
             <h2>I already have an account</h2>
             <span>Sign in with your email and password</span>
-            <form onClick={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <FormInput label="Email" type='email' required onChange={handleChange} name='email' value={email} />
                 <FormInput label="Password" type='password' required onChange={handleChange} name='password' value={password} />
                 <div className="buttons-container">
